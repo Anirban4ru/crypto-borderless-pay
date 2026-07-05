@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migrant Remittances | Free & Instant</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Ethers.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #f4f4f0;
+            background-image: radial-gradient(#d1d5db 2px, transparent 2px);
+            background-size: 24px 24px;
+            color: #000000;
+            font-family: 'Inter', sans-serif;
+        }
+        .brutal-glass {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 4px solid #000000;
+            box-shadow: 12px 12px 0px 0px #000000;
+            border-radius: 0px;
+        }
+        .brutal-input {
+            border: 3px solid #000000;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 0px;
+            color: #000000;
+            transition: all 0.2s ease;
+        }
+        .brutal-input:focus {
+            outline: none;
+            box-shadow: 6px 6px 0px 0px #000000;
+            transform: translate(-2px, -2px);
+        }
+        .brutal-btn {
+            background-color: #3b82f6; /* Blue 500 */
+            border: 4px solid #000000;
+            border-radius: 0px;
+            color: #ffffff;
+            box-shadow: 8px 8px 0px 0px #000000;
+            transition: all 0.1s ease;
+        }
+        .brutal-btn:active {
+            box-shadow: 2px 2px 0px 0px #000000;
+            transform: translate(6px, 6px);
+        }
+        .brutal-btn:disabled {
+            background-color: #9ca3af;
+            color: #4b5563;
+            cursor: not-allowed;
+        }
+        .brutal-btn:disabled:active {
+            box-shadow: 8px 8px 0px 0px #000000;
+            transform: none;
+        }
+        .brutal-wallet-btn {
+            background-color: #ffffff;
+            border: 3px solid #000000;
+            border-radius: 0px;
+            box-shadow: 6px 6px 0px 0px #000000;
+            color: #000000;
+            transition: all 0.1s ease;
+        }
+        .brutal-wallet-btn:active {
+            box-shadow: 2px 2px 0px 0px #000000;
+            transform: translate(4px, 4px);
+        }
+        .brutal-status-info {
+            background-color: #bfdbfe; /* blue-200 */
+            border: 3px solid #000000;
+            color: #000000;
+            box-shadow: 4px 4px 0px 0px #000000;
+        }
+        .brutal-status-success {
+            background-color: #bbf7d0; /* green-200 */
+            border: 3px solid #000000;
+            color: #000000;
+            box-shadow: 4px 4px 0px 0px #000000;
+        }
+        .brutal-status-error {
+            background-color: #fecaca; /* red-200 */
+            border: 3px solid #000000;
+            color: #000000;
+            box-shadow: 4px 4px 0px 0px #000000;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6">
+
+    <div class="max-w-lg w-full brutal-glass p-8">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-10 border-b-4 border-black pb-6">
+            <h1 class="text-4xl font-black uppercase tracking-tighter text-black mb-3">
+                Global Remittances
+            </h1>
+            <p class="text-black font-semibold uppercase tracking-wider text-sm bg-yellow-300 inline-block px-3 py-1 border-2 border-black">
+                Send crypto instantly globally
+            </p>
+        </div>
+
+        <!-- Wallet Connection -->
+        <div class="flex justify-center mb-8">
+            <button id="connectWalletBtn" class="brutal-wallet-btn font-bold py-3 px-6 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+                <span id="walletAddressText" class="tracking-wide">Connect Wallet</span>
+            </button>
+        </div>
+
+        <!-- Transfer Form -->
+        <form id="remittanceForm" class="space-y-6">
+            <div>
+                <label for="recipientAddress" class="block text-lg font-bold text-black mb-2 uppercase tracking-wide">Recipient Address</label>
+                <input type="text" id="recipientAddress" placeholder="0x..." required
+                    class="w-full brutal-input px-4 py-3 text-black placeholder-gray-500 font-mono font-bold text-lg">
+            </div>
+
+            <div>
+                <label for="amount" class="block text-lg font-bold text-black mb-2 uppercase tracking-wide">Amount to Send</label>
+                <div class="relative">
+                    <input type="number" id="amount" placeholder="0.00" step="any" min="0" required
+                        class="w-full brutal-input px-4 py-3 text-black placeholder-gray-500 font-bold text-lg">
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                        <span class="text-black font-black uppercase bg-gray-200 px-2 py-1 border-2 border-black">ETH</span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" id="sendBtn" disabled
+                class="w-full brutal-btn font-black uppercase tracking-widest py-4 px-4 text-xl mt-4">
+                SEND MONEY
+            </button>
+        </form>
+
+        <!-- Status Area -->
+        <div id="statusArea" class="mt-8 hidden p-4 text-sm font-bold tracking-wide">
+            <!-- Dynamic status text will go here -->
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

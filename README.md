@@ -1,4 +1,4 @@
-# 🌍 Global Remittances
+# 🌍 Crypto Borderless Pay
 
 ![Global Remittances UI](https://bchain-six.vercel.app/)
 
@@ -33,8 +33,8 @@ If you want to run this project locally:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Anirban4ru/global-remittances.git
-   cd global-remittances
+   git clone https://github.com/Anirban4ru/crypto-borderless-pay.git
+   cd crypto-borderless-pay
    ```
 
 2. **Install dependencies:**

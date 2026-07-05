@@ -1,6 +1,6 @@
 # 🌍 Crypto Borderless Pay
 
-![Global Remittances UI](https://bchain-six.vercel.app/)
+![Global Remittances UI](https://crypto-borderless-pay.vercel.app/)
 
 A highly efficient, non-custodial decentralized application (dApp) built to facilitate instant global crypto remittances. Featuring a striking light-mode Neo-Brutalist UI with glassmorphic accents, this application allows users to securely transfer funds across borders with near-zero friction.
 
@@ -25,7 +25,7 @@ A highly efficient, non-custodial decentralized application (dApp) built to faci
 ## 🚀 Live Demo
 
 Check out the live application hosted on Vercel:
-**[Launch Global Remittances](https://bchain-six.vercel.app)**
+**[Launch Global Remittances](https://crypto-borderless-pay.vercel.app)**
 
 ## 💻 Local Development
 
